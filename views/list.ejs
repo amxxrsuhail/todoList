@@ -10,13 +10,26 @@
 
 <body>
     <!-- * below is the syntax for adding marker for ejs  -->
-    <%if(thisDayName==="Saturday"|| thisDayName==="Sunday"){%>
-    <h1 style="color: red;">Its <%=thisDayName%>. Hence its a <%= thisDay %>
+    <h1 style="color: rgb(125, 209, 248);">
+        <%=thisDayName%>
     </h1>
-    <% }else{ %>
-        <h1 style="color: blue;">Its <%=thisDayName%>. Hence its a <%= thisDay %>
-        </h1>
-        <% } %>
+    <ul>
+        <!-- *to print every new todo item in new list  -->
+        <% for( i=0; i < newItem.length; i++ ) { %>
+            <li>
+                <%= newItem[i] %>
+            </li>
+            <% } %>
+    </ul>
+    <form action="/" method="post">
+        <ul>
+            <li>
+                <input type="text" name="listAdd" placeholder="type">
+                <button type="submit">Add</button>
+            </li>
+        </ul>
+    </form>
+
 </body>
 
 </html>
