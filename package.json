@@ -1,0 +1,22 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "An app to make a list of things to do ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amxxrsuhail/todoList.git"
+  },
+  "author": "ameer suhail",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amxxrsuhail/todoList/issues"
+  },
+  "homepage": "https://github.com/amxxrsuhail/todoList#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
