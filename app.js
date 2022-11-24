@@ -23,13 +23,17 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   let newToDo = req.body.listAdd;
-  // console.log(req.body);
+  console.log(req.body);
   if (req.body.list === "Work") {
-    workList.push(newToDo);
-    res.redirect("/work");
+    if (req.body.listAdd !== "") {
+      workList.push(newToDo);
+      res.redirect("/work");
+    }
   } else {
-    toDos.push(newToDo);
-    res.redirect("/");
+    if (req.body.listAdd !== "") {
+      toDos.push(newToDo);
+      res.redirect("/");
+    }
   }
 });
 
