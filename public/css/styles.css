@@ -1,5 +1,5 @@
 html {
-  background-image: -webkit-linear-gradient( #ffefce 25vh,#ffbf36 70vh );
+  background-image: -webkit-linear-gradient(#ffefce 25vh, #ffbf36 70vh);
   min-height: 100vh;
   font-family: "Cabin", sans-serif;
 }
@@ -93,40 +93,40 @@ footer p {
   text-align: center;
 }
 
-@media screen and (max-width: 420px){
-.box{
-  padding-right: 10px;
-  border-radius: 30px;
-}
+@media screen and (max-width: 420px) {
+  .box {
+    padding-right: 10px;
+    border-radius: 30px;
+  }
 
-#heading{
- border-radius: 30px;
-}
+  #heading {
+    border-radius: 30px;
+  }
 
-html {
-  background-image: -webkit-linear-gradient( #ffefce 1vh,#ffbf36 25vh );
-  min-height: 100vh;
-  padding-left: 20px;
-  padding-right: 20px;
-}
+  html {
+    background-image: -webkit-linear-gradient(#ffefce 1vh, #ffbf36 25vh);
+    min-height: 100vh;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
-button{
-  padding: 8px;
-}
+  button {
+    padding: 8px;
+  }
 
-button {
-  min-height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  border-color: transparent;
-  background-color: #ffbf36;
-  color: #fff;
-  font-size: 30px;
-  border-width: 0px;
-  margin: 2px;
-}
+  button {
+    min-height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-color: transparent;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+    border-width: 0px;
+    margin: 2px;
+  }
 
-.item {
-  margin: 10px;
-}
+  .item {
+    margin: 10px;
+  }
 }
