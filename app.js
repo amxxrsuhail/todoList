@@ -25,19 +25,24 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  newToDo = req.body.listAdd;
-  toDos.push(newToDo);
-  res.redirect("/");
+  let newToDo = req.body.listAdd;
+  // console.log(req.body);
+  if (req.body.list === "Work") {
+    workList.push(newToDo);
+    res.redirect("/work");
+  } else {
+    toDos.push(newToDo);
+    res.redirect("/");
+  }
 });
 
-// ! ------for work tab----------- 
+// ! ------for work tab-----------
 app.get("/work", (req, res) => {
   res.render("list", { listHeading: "Work List", newItem: workList });
 });
-app.post("/work", (req, res) => {
-  newToDo = req.body.listAdd;
-  workList.push(newToDo);
-  res.redirect("/work");
+
+app.get("/about", (req, res) => {
+  res.render("about");
 });
 
 app.listen(port, () => {

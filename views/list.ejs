@@ -1,45 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- * below method is used so that we dont have to repeat a set of codes like header and foooter are used to be same for all page  -->
+<%- include("header"); -%> 
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Todo List</title>
-</head>
+<div class="box">
+    <!-- * below is the syntax for adding marker for ejs  -->
+    <h1 id="heading">
+        <%=listHeading%>
+    </h1>
+</div>
+<div class="box">
+    <!-- *to print every new todo item in new list  -->
+    <% for( let i=0; i < newItem.length; i++ ) { %>
+        <div class="item">
+            <input type="checkbox">
+            <p>
+                <%= newItem[i] %>
+            </p>
+        </div>
+        <% } %>
+            <form class="item" action="/" method="post">
+                <input type="text" name="listAdd" placeholder="Add item" autocomplete="off">
+                <!-- ! here dynamic value is given below in order to make the ifelse statemnt work in app.js  -->
+                <!-- ! also the value for req.body.list takes only the fst word without any space   -->
+                <button type="submit" name="list" value=<%=listHeading %>>+</button>
 
-<body>
-    <div class="box">
-        <!-- * below is the syntax for adding marker for ejs  -->
-        <h1 id="heading">
-            <%=listHeading%>
-        </h1>
-    </div>
-    <div class="box">
-        <!-- *to print every new todo item in new list  -->
-        <% for( let i=0; i < newItem.length; i++ ) { %>
-            <div class="item">
-                <input type="checkbox">
-                <p>
-                    <%= newItem[i] %>
-                </p>
-            </div>
-            <% } %>
-                <form class="item" action="/" method="post">
+            </form>
+</div>
 
-                    <input type="text" name="listAdd" placeholder="Add item" autocomplete="off">
-                    <button type="submit">+</button>
-
-                </form>
-    </div>
-
-</body>
-<footer>
-    <p>&copy; K Ameer Suhail</p>
-</footer>
-
-</html>
+<!-- * below method is used so that we dont have to repeat a set of codes like header and foooter are used to be same for all page  -->
+<%- include("footer"); -%> 
