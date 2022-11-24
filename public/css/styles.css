@@ -96,7 +96,7 @@ footer p {
 @media screen and (max-width: 420px){
 .box{
   padding-right: 10px;
-  border-radius: 50px;
+  border-radius: 30px;
 }
 
 #heading{
@@ -104,7 +104,11 @@ footer p {
 }
 
 html {
-  background-image: -webkit-linear-gradient( #ffefce 5vh,#ffbf36 25vh );
+  background-image: -webkit-linear-gradient( #ffefce 1vh,#ffbf36 25vh );
   min-height: 100vh;
+}
+
+button{
+  padding: 5px;
 }
 }
