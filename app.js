@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   let newToDo = req.body.listAdd;
-  console.log(req.body);
+  // console.log(req.body);
   if (req.body.list === "Work") {
     if (req.body.listAdd !== "") {
       workList.push(newToDo);

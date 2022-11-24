@@ -80,7 +80,6 @@ input[type="text"] {
 
 input[type="text"]:focus {
   outline: none;
-  box-shadow: inset 0 -3px 0 0 #ffbf36;
 }
 
 ::placeholder {
@@ -92,4 +91,20 @@ footer p {
   margin-bottom: 40px;
   color: #b7891e;
   text-align: center;
+}
+
+@media screen and (max-width: 420px){
+.box{
+  padding-right: 10px;
+  border-radius: 50px;
+}
+
+#heading{
+ border-radius: 50px;
+}
+
+html {
+  background-image: -webkit-linear-gradient( #ffefce 5vh,#ffbf36 25vh );
+  min-height: 100vh;
+}
 }
