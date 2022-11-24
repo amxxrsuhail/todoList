@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 3000;
-const date = require(`${__dirname}/date.js`)
+const date = require(`${__dirname}/date.js`);
 
 // * it is preferred to use let instead of var
 let toDos = [];
@@ -42,6 +42,6 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`Server started listening on port ${port}`);
 });
