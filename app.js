@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+const date = require(`${__dirname}/date.js`)
+
 // * it is preferred to use let instead of var
 let toDos = [];
 let workList = [];
@@ -14,12 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  let today = new Date();
-  let dayName = today.toLocaleString("en-US", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  });
+  let dayName = date();
   // * in the below method current day is the marker in ejs file in the views folder
   res.render("list", { listHeading: dayName, newItem: toDos });
 });
