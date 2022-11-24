@@ -95,7 +95,6 @@ footer p {
 
 @media screen and (max-width: 420px) {
   .box {
-    padding-right: 10px;
     border-radius: 30px;
   }
 
