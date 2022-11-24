@@ -38,9 +38,9 @@ app.get("/work", (req, res) => {
   res.render("list", { listHeading: "Work List", newItem: workList });
 });
 
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+// app.get("/about", (req, res) => {
+//   res.render("about");
+// });
 
 app.listen(process.env.PORT || port, () => {
   console.log(`Server started listening on port ${port}`);
