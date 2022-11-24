@@ -115,14 +115,8 @@ footer p {
   }
 
   button {
-    min-height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    border-color: transparent;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
-    font-size: 30px;
-    border-width: 0px;
     margin: 2px;
   }
 
