@@ -1,11 +1,23 @@
+// !----------database boilerplate---------------
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/toDoListDB");
+
+const itemSchema = { name: { type: String, required: true } };
+
+const Item = mongoose.model("Item", itemSchema);
+
+const kitty = new Cat({ name: "Zildjian" });
+kitty.save().then(() => console.log("meow"));
+
+// ! ----------express boilerplate---------------
 const express = require("express");
 const app = express();
 const port = 3000;
 const date = require(`${__dirname}/date.js`);
 
 // * it is preferred to use let instead of var
-let toDos = [];
-let workList = [];
+// let toDos = [];
+// let workList = [];
 
 app.set("view engine", "ejs");
 
