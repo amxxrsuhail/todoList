@@ -1,13 +1,26 @@
-// !----------database boilerplate---------------
+// !------------database boilerplate---------------
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/toDoListDB");
 
-const itemSchema = { name: { type: String, required: true } };
+const itemSchema = { item: { type: String, required: true } };
 
 const Item = mongoose.model("Item", itemSchema);
 
-const kitty = new Cat({ name: "Zildjian" });
-kitty.save().then(() => console.log("meow"));
+const item1 = new Item({ item: "buy milk" });
+// item1.save().then(() => console.log("item 1 added"));
+const item2 = new Item({ item: "buy eggs" });
+// item2.save().then(() => console.log("item 2 added"));
+const item3 = new Item({ item: "buy veggies" });
+
+const sampleItems = [item1, item2, item3];
+
+Item.insertMany(sampleItems, (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("sample items added successfully");
+  }
+});
 
 // ! ----------express boilerplate---------------
 const express = require("express");
@@ -16,8 +29,8 @@ const port = 3000;
 const date = require(`${__dirname}/date.js`);
 
 // * it is preferred to use let instead of var
-// let toDos = [];
-// let workList = [];
+let toDos = [];
+let workList = [];
 
 app.set("view engine", "ejs");
 
