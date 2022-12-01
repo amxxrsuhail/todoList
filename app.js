@@ -5,22 +5,13 @@ mongoose.connect("mongodb://localhost:27017/toDoListDB");
 const itemSchema = { item: { type: String, required: true } };
 
 const Item = mongoose.model("Item", itemSchema);
+const workItem = mongoose.model("workItem", itemSchema);
 
-const item1 = new Item({ item: "buy milk" });
-// item1.save().then(() => console.log("item 1 added"));
-const item2 = new Item({ item: "buy eggs" });
-// item2.save().then(() => console.log("item 2 added"));
-const item3 = new Item({ item: "buy veggies" });
+const item1 = new Item({ item: "type something" });
+const item2 = new Item({ item: "press plus sign to submit" });
+const item3 = new Item({ item: "eg: buy milk" });
 
 const sampleItems = [item1, item2, item3];
-
-Item.insertMany(sampleItems, (err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("sample items added successfully");
-  }
-});
 
 // ! ----------express boilerplate---------------
 const express = require("express");
@@ -29,8 +20,8 @@ const port = 3000;
 const date = require(`${__dirname}/date.js`);
 
 // * it is preferred to use let instead of var
-let toDos = [];
-let workList = [];
+// let toDos = [];
+// let workList = [];
 
 app.set("view engine", "ejs");
 
@@ -42,29 +33,68 @@ app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   let dayName = date();
-  // * in the below method current day is the marker in ejs file in the views folder
-  res.render("list", { listHeading: dayName, newItem: toDos });
+
+  Item.find((err, items) => {
+    if (items.length === 0) {
+      Item.insertMany(sampleItems, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("sample items successfully saved in DB");
+        }
+      });
+      res.redirect("/");
+    } else {
+      // * in the below method current day is the marker in ejs file in the views folder
+      res.render("list", { listHeading: dayName, newItem: items });
+    }
+  });
 });
 
 app.post("/", (req, res) => {
   let newToDo = req.body.listAdd;
   // console.log(req.body);
   if (req.body.list === "Work") {
-    if (req.body.listAdd !== "") {
-      workList.push(newToDo);
-      res.redirect("/work");
-    }
+    // !----------------collection for work tab--------------------
+    const addedWorkItem = workItem({ item: newToDo });
+    addedWorkItem.save((err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("work items added successfully");
+      }
+    });
+    res.redirect("/work");
   } else {
-    if (req.body.listAdd !== "") {
-      toDos.push(newToDo);
-      res.redirect("/");
-    }
+    // !------------collection for general list item----------------
+    const addedItem = Item({ item: newToDo });
+    addedItem.save((err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("new item successfully saved");
+      }
+    });
+    res.redirect("/");
   }
 });
 
 // ! ------for work tab-----------
 app.get("/work", (req, res) => {
-  res.render("list", { listHeading: "Work List", newItem: workList });
+  workItem.find((err, workItems) => {
+    if (workItems.length === -0) {
+      workItem.insertMany(sampleItems, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("sample items saved successfully");
+        }
+      });
+      res.redirect("/work");
+    } else {
+      res.render("list", { listHeading: "Work List", newItem: workItems });
+    }
+  });
 });
 
 app.get("/about", (req, res) => {
