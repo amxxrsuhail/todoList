@@ -1,27 +1,22 @@
-// !------------database boilerplate---------------
+// !-------------database boilerplate---------------
+
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/toDoListDB");
 
 const itemSchema = { item: { type: String, required: true } };
 
 const Item = mongoose.model("Item", itemSchema);
-const workItem = mongoose.model("workItem", itemSchema);
 
 const item1 = new Item({ item: "type something" });
-const item2 = new Item({ item: "press plus sign to submit" });
-const item3 = new Item({ item: "eg: buy milk" });
 
-const sampleItems = [item1, item2, item3];
+const sampleItems = [item1];
 
-// ! ----------express boilerplate---------------
+// ! -------------express boilerplate----------------
+
 const express = require("express");
 const app = express();
 const port = 3000;
 const date = require(`${__dirname}/date.js`);
-
-// * it is preferred to use let instead of var
-// let toDos = [];
-// let workList = [];
 
 app.set("view engine", "ejs");
 
@@ -54,18 +49,6 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
   let newToDo = req.body.listAdd;
   // console.log(req.body);
-  if (req.body.list === "Work") {
-    // !----------------collection for work tab--------------------
-    const addedWorkItem = workItem({ item: newToDo });
-    addedWorkItem.save((err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("work items added successfully");
-      }
-    });
-    res.redirect("/work");
-  } else {
     // !------------collection for general list item----------------
     const addedItem = Item({ item: newToDo });
     addedItem.save((err) => {
@@ -76,25 +59,18 @@ app.post("/", (req, res) => {
       }
     });
     res.redirect("/");
-  }
 });
 
-// ! ------for work tab-----------
-app.get("/work", (req, res) => {
-  workItem.find((err, workItems) => {
-    if (workItems.length === -0) {
-      workItem.insertMany(sampleItems, (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("sample items saved successfully");
-        }
-      });
-      res.redirect("/work");
+app.post("/delete", (req, res) => {
+  const checkedItem = req.body.checked;
+  Item.findByIdAndRemove({ _id: checkedItem }, (err) => {
+    if (err) {
+      console.log(err);
     } else {
-      res.render("list", { listHeading: "Work List", newItem: workItems });
+      console.log("deleted");
     }
   });
+  res.redirect("/");
 });
 
 app.get("/about", (req, res) => {

@@ -9,21 +9,23 @@
     </div>
     <div class="box">
         <!-- *to print every new todo item in new list  -->
-        <%newItem.forEach((items) => {%>
-        <div class="item">
-            <input type="checkbox">
-            <p>
-                <%= items.item %>
-            </p>
-        </div>
-        <%});%>
+        <%newItem.forEach((items)=> {%>
+            <form class="itemList" action="/delete" method="post">
+                <div class="item">
+                    <input type="checkbox" name="checked" value="<%=items._id%>" onchange="this.form.submit()">
+                    <p>
+                        <%= items.item %>
+                    </p>
+                </div>
+            </form>
+            <%});%>
 
-        <form class="item" action="/" method="post">
-            <input type="text" name="listAdd" placeholder="Add item" autocomplete="off">
-            <!-- ! here dynamic value is given below in order to make the ifelse statemnt work in app.js  -->
-            <!-- ! also the value for req.body.list takes only the fst word without any space   -->
-            <button type="submit" name="list" value=<%=listHeading %>>+</button>
-        </form>
+                <form class="item" action="/" method="post">
+                    <input type="text" name="listAdd" placeholder="Add item" autocomplete="off">
+                    <!-- ! here dynamic value is given below in order to make the ifelse statemnt work in app.js  -->
+                    <!-- ! also the value for req.body.list takes only the fst word without any space   -->
+                    <button type="submit" name="list" value=<%=listHeading %>>+</button>
+                </form>
     </div>
 
     <!-- * below method is used so that we dont have to repeat a set of codes like header and foooter are used to be same for all page  -->
