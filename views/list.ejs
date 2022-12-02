@@ -17,6 +17,7 @@
                         <%= items.item %>
                     </p>
                 </div>
+                <input type="hidden" name="listName" value="<%=listHeading%> ">
             </form>
             <%});%>
 
@@ -24,7 +25,7 @@
                     <input type="text" name="listAdd" placeholder="Add item" autocomplete="off">
                     <!-- ! here dynamic value is given below in order to make the ifelse statemnt work in app.js  -->
                     <!-- ! also the value for req.body.list takes only the fst word without any space   -->
-                    <button type="submit" name="list" value=<%=listHeading %>>+</button>
+                    <button type="submit" name="list" value=<%=listHeading%>>+</button>
                 </form>
     </div>
 
