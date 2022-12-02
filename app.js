@@ -19,8 +19,11 @@ const Item = mongoose.model("Item", itemSchema);
 const express = require("express");
 const app = express();
 const port = 3000;
+
 const date = require(`${__dirname}/date.js`);
 let dayName = date();
+
+const _ = require("lodash");
 
 app.set("view engine", "ejs");
 
@@ -33,7 +36,7 @@ app.use(express.static("public"));
 app.get("/", (req, res) => {
   Item.find((err, items) => {
     // * in the below method current day is the marker in ejs file in the views folder
-    res.render("list", { listHeading: `${dayName} List`, newItem: items });
+    res.render("list", { listHeading: dayName, newItem: items });
   });
 });
 
@@ -48,7 +51,7 @@ app.post("/", (req, res) => {
     addedItem.save();
     res.redirect("/");
   } else {
-    Custom.findOne({ name: titleName }, (err, foundItems) => {
+    Custom.findOne({ name: _.lowerCase(titleName) }, (err, foundItems) => {
       if (err) {
         console.log(err);
       } else {
@@ -63,21 +66,33 @@ app.post("/", (req, res) => {
 app.post("/delete", (req, res) => {
   const checkedItem = req.body.checked;
   const listName = req.body.listName;
+  const todayList = dayName;
 
-  if (listName === `${dayName} List`) {
+  if (listName === todayList) {
     Item.findByIdAndRemove({ _id: checkedItem }, (err) => {
       if (err) {
         console.log(err);
       } else {
-        console.log("deleted");
+        // console.log("deleted");
+        res.redirect("/");
       }
     });
-    res.redirect("/");
+  } else {
+    // * combined mongodb pull and mongoose findOneAndUpdate to remove documents in an array
+    Custom.findOneAndUpdate(
+      { name: _.lowerCase(listName) },
+      { $pull: { items: { _id: checkedItem } } },
+      (err, results) => {
+        if (!err) {
+          res.redirect(`/${listName}`);
+        }
+      }
+    );
   }
 });
 
 app.get("/:newList", (req, res) => {
-  const newListName = req.params.newList;
+  const newListName = _.lowerCase(req.params.newList);
 
   Custom.findOne({ name: newListName }, (err, newList) => {
     if (!err) {
@@ -98,7 +113,7 @@ app.get("/:newList", (req, res) => {
       } else {
         // console.log("sorry the list name already exists........");
         res.render("list", {
-          listHeading: `${capitalizeFirstLetter(newListName)} List`,
+          listHeading: _.capitalize(newListName),
           newItem: newList.items,
         });
       }
@@ -113,11 +128,3 @@ app.get("/about", (req, res) => {
 app.listen(process.env.PORT || port, () => {
   console.log(`Server started listening on port ${port}`);
 });
-
-// * function to make first letter capital
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-function unCapitalizeFirstLetter(string) {
-  return string.charAt(0).toLowerCase() + string.slice(1);
-}
