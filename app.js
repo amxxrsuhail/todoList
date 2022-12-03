@@ -1,5 +1,4 @@
 // !-------------database boilerplate---------------
-
 const mongoose = require("mongoose");
 mongoose.connect("mongodb+srv://ameersuhail:AMINAdavood41099@cluster0.czyujet.mongodb.net/toDoListDB");
 
@@ -15,7 +14,6 @@ const Custom = mongoose.model("Custom", customSchema);
 const Item = mongoose.model("Item", itemSchema);
 
 // ! -------------express boilerplate----------------
-
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -33,6 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 // * files like css icons etc should kept in a folder public and href should typed as if we are in public folder
 app.use(express.static("public"));
 
+// !-------------------------home---------------------------
 app.get("/", (req, res) => {
   Item.find((err, items) => {
     // * in the below method current day is the marker in ejs file in the views folder
@@ -63,6 +62,7 @@ app.post("/", (req, res) => {
   }
 });
 
+// !-----------------------deletion code--------------------------- 
 app.post("/delete", (req, res) => {
   const checkedItem = req.body.checked;
   const listName = req.body.listName;
@@ -91,6 +91,7 @@ app.post("/delete", (req, res) => {
   }
 });
 
+// !-------------------------dynamic pages------------------------------
 app.get("/:newList", (req, res) => {
   const newListName = _.lowerCase(req.params.newList);
 
