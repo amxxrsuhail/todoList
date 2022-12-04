@@ -126,6 +126,6 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
-app.listen(process.env.PORT || port, () => {
+app.listen(port, () => {
   console.log(`Server started listening on port ${port}`);
 });
