@@ -125,4 +125,8 @@ footer p {
   .item {
     margin: 10px;
   }
+
+  .itemList {
+    border-bottom: 0px solid #f1f1f1;
+  }
 }
