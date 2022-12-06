@@ -1,2 +1,2 @@
-# todoList
-A todo list app list to start learning EJS and practice it.
+# To-Do List
+Crafted an app to make a list of things to do which displays the current list and users can tick of things done to delete it. Used EJS templating to implement adding a new item to the list and to dynamically create new lists. Used EJS layouts to avoid repetition of header and footer code in various pages. And in order to make it available on the web, I have used MongoDB Atlas to store the data and hosted it by creating an EC2 instance on AWS with ubuntu and used PM2 from NPM to continuously run my server on the instance.
