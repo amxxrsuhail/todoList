@@ -18,9 +18,6 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-const date = require(`${__dirname}/date.js`);
-let dayName = date();
-
 const _ = require("lodash");
 
 app.set("view engine", "ejs");
@@ -35,7 +32,7 @@ app.use(express.static("public"));
 app.get("/", (req, res) => {
   Item.find((err, items) => {
     // * in the below method current day is the marker in ejs file in the views folder
-    res.render("list", { listHeading: dayName, newItem: items });
+    res.render("list", { listHeading: "Today", newItem: items });
   });
 });
 
@@ -46,7 +43,7 @@ app.post("/", (req, res) => {
   const addedItem = Item({ item: newToDo });
   // console.log(titleName);
   // console.log(dayName);
-  if (titleName == dayName) {
+  if (titleName == "Today") {
     addedItem.save();
     res.redirect("/");
   } else {
@@ -66,9 +63,8 @@ app.post("/", (req, res) => {
 app.post("/delete", (req, res) => {
   const checkedItem = req.body.checked;
   const listName = req.body.listName;
-  const todayList = dayName;
 
-  if (listName === todayList) {
+  if (listName === "Today") {
     Item.findByIdAndRemove({ _id: checkedItem }, (err) => {
       if (err) {
         console.log(err);
