@@ -1,6 +1,7 @@
+require("dotenv").config();
 // !-----------------database boilerplate-----------------
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://ameersuhail:AMINAdavood41099@cluster0.czyujet.mongodb.net/toDoListDB");
+mongoose.connect(`mongodb+srv://ameersuhail:${process.env.MONGOOSEKEY}@cluster0.czyujet.mongodb.net/toDoListDB`);
 
 const itemSchema = { item: { type: String, required: true } };
 
