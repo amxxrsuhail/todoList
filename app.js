@@ -13,7 +13,7 @@ const Custom = mongoose.model("Custom", customSchema);
 
 const Item = mongoose.model("Item", itemSchema);
 
-// !-----------------express boilerplate-------------------
+// !-----------------express boilerplate--------------------
 const express = require("express");
 const app = express();
 const port = 3000;
