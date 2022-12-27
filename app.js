@@ -17,7 +17,7 @@ const Item = mongoose.model("Item", itemSchema);
 // !-----------------express boilerplate--------------------
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 4000;
 
 const _ = require("lodash");
 
